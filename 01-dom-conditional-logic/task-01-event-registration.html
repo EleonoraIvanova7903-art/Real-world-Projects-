@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Event registration check</title>
+  </head>
+  <body>
+    <label for="age">Age</label>
+    <input type="text" name="" id="age" />
+
+    <label for="ticket">Ticket type</label>
+    <select name="" id="ticket">
+      <option value="standard">Standard</option>
+      <option value="vip">VIP</option></select
+    ><br /><br />
+
+    <label for="">
+      <input type="checkbox" id="terms" />
+      Accept terms
+    </label>
+
+    <button id="btn">Check</button><br /><br />
+    <div id="res"></div>
+
+    <script>
+      const ageInput = document.querySelector("#age");
+      const ticketSelect = document.querySelector("#ticket");
+      const termsInput = document.querySelector("#terms");
+      const button = document.querySelector("#btn");
+      const result = document.querySelector("#res");
+
+      function handleRegisterCheck() {
+        const ageValue = ageInput.value.trim();
+        const ticketValue = ticketSelect.value;
+        const hasTerms = termsInput.checked;
+        let message = "";
+
+        if (ageValue === "") {
+          message = "Enter your age.";
+        } else if (Number.isNaN(Number(ageValue))) {
+          message = "Age must be a number.";
+        } else if (Number(ageValue) < 16) {
+          message = "You must be 16 or older.";
+        } else if (!hasTerms) {
+          message = "You must accept the terms.";
+        } else if (ticketValue === "vip" && Number(ageValue) < 18) {
+          message = "VIP is available from 18+.";
+        } else {
+          message = "Registration approved.";
+        }
+        result.innerHTML = message;
+      }
+
+      button.addEventListener("click", handleRegisterCheck);
+    </script>
+  </body>
+</html>
