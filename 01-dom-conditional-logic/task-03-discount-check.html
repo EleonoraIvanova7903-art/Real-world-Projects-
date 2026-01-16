@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Task 3 - Discount check</title>
+  </head>
+  <body>
+    <label for="code">Code</label>
+    <input type="text" name="" id="code" />
+    <br /><br />
+
+    <label for="total">Total</label>
+    <input type="text" id="total" />
+    <br /><br />
+
+    <label for="">
+      <input type="checkbox" name="" id="member" />
+      Member
+    </label>
+    <br /><br />
+
+    <button id="btn">Check</button>
+    <div id="res"></div>
+
+    <script>
+      const codeInput = document.querySelector("#code");
+      const totalInput = document.querySelector("#total");
+      const memberInput = document.querySelector("#member");
+      const button = document.querySelector("#btn");
+      const result = document.querySelector("#res");
+
+      function handleDiscountCheck() {
+        const codeValue = codeInput.value.trim();
+        const totalValue = totalInput.value.trim();
+        const isMember = memberInput.checked;
+        let message = "";
+
+        if (codeValue === "" || totalValue === "") {
+          message = "Enter code and total.";
+        } else if (Number.isNaN(Number(totalValue))) {
+          message = "Total must be a number.";
+        } else if (Number(totalValue) <= 0) {
+          message = "Total must be greater than 0.";
+        } else if (codeValue !== "SAVE10" && codeValue !== "VIP") {
+          message = "Invalid cod.";
+        } else if (codeValue === "SAVE10" && Number(totalValue) < 30) {
+          message = "SAVE10 requires total of 30 or more.";
+        } else if (
+          codeValue === "VIP" &&
+          Number(totalValue) < 50 &&
+          isMember === false
+        ) {
+          message = "VIP requires membership or total of 50 or more.";
+        } else {
+          message = "Discount applied.";
+        }
+
+        result.innerHTML = message;
+      }
+
+      button.addEventListener("click", handleDiscountCheck);
+    </script>
+  </body>
+</html>
