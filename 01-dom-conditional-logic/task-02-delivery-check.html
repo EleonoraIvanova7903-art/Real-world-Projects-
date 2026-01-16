@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Task 2 - Delivery check</title>
+  </head>
+  <body>
+    <label for="city">City</label>
+    <input type="text" id="city" />
+
+    <label for="total">Order total</label>
+    <input type="text" id="total" />
+
+    <label for="express">
+      <input type="checkbox" id="express" />
+      Express delivery
+    </label>
+
+    <button id="btn">Check</button>
+    <div id="res"></div>
+
+    <script>
+      const cityInput = document.querySelector("#city");
+      const totalInput = document.querySelector("#total");
+      const expressInput = document.querySelector("#express");
+      const button = document.querySelector("#btn");
+      const result = document.querySelector("#res");
+
+      function handleDeliveryCheck() {
+        const cityValue = cityInput.value.trim();
+        const totalValue = totalInput.value.trim();
+        const isExpress = expressInput.checked;
+        let message = "";
+
+        if (cityValue === "" || totalValue === "") {
+          message = "Enter city and order total.";
+        } else if (Number.isNaN(Number(totalValue))) {
+          message = "Order total must be a number.";
+        } else if (Number(totalValue) <= 0) {
+          message = "Order total must be greater than 0";
+        } else if (isExpress === true && Number(totalValue) < 30) {
+          message = "Express requires total of 30 or more.";
+        } else if (cityValue === "London" && Number(totalValue) >= 25) {
+          message = "Free delivery.";
+        } else if (cityValue === "London" && Number(totalValue) < 25) {
+          message = "Delivery fee: 3.99";
+        } else if (cityValue === "London" && Number(totalValue) >= 40) {
+          message = "Free delivery.";
+        } else {
+          message = "Delivery fee: 5.99.";
+        }
+        result.innerHTML = message;
+      }
+
+      button.addEventListener("click", handleDeliveryCheck);
+    </script>
+  </body>
+</html>
