@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Task 02 - Includes banned word</title>
+  </head>
+  <body>
+    <label for="comment-input">Comment</label>
+    <input type="text" id="comment-input" />
+    <br /><br />
+    <button id="btn-send">Send</button>
+    <div id="res"></div>
+
+    <script>
+      const commentInput = document.querySelector("#comment-input");
+      const button = document.querySelector("#btn-send");
+      const result = document.querySelector("#res");
+
+      function handleCommentCheck() {
+        const commentValue = commentInput.value.trim();
+        let message = "";
+
+        if (commentValue === "") {
+          message = "Comment cannot be empty.";
+        } else if (commentValue.includes("spam")) {
+          message = "Comment rejected. Forbidden word detected.";
+        } else {
+          message = "Comment accepted.";
+        }
+        result.innerHTML = message;
+      }
+
+      button.addEventListener("click", handleCommentCheck);
+    </script>
+  </body>
+</html>
