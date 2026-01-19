@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Includes word check</title>
+  </head>
+  <body>
+    <label for="text-input">Text</label>
+    <input type="text" id="text-input" />
+    <br /><br />
+
+    <label for="search-input">Search</label>
+    <input type="text" id="search-input" />
+    <br /><br />
+
+    <button id="btn-input">Check</button>
+    <div id="res"></div>
+
+    <script>
+      const textInput = document.querySelector("#text-input");
+      const searchInput = document.querySelector("#search-input");
+      const button = document.querySelector("#btn-input");
+      const result = document.querySelector("#res");
+
+      function handleCheck() {
+        const textValue = textInput.value.trim();
+        const searchValue = searchInput.value.trim();
+
+        let message = "";
+
+        if (textValue === "" || searchValue === "") {
+          message = "Please enter text and word.";
+        } else if (textValue.includes(searchValue)) {
+          message = "The word was found in the text.";
+        } else {
+          message = "The word was not found in the text.";
+        }
+        result.innerHTML = message;
+      }
+
+      button.addEventListener("click", handleCheck);
+    </script>
+  </body>
+</html>
