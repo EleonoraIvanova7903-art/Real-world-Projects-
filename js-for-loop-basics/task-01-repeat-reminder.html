@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Repeat Reminder</title>
+  </head>
+  <body>
+    <label for="reminder-input">Message</label>
+    <input type="text" id="reminder-input" />
+    <br /><br />
+
+    <label for="count-input">Count</label>
+    <input type="text" id="count-input" />
+    <br /><br />
+
+    <button id="btn-show">Show</button>
+    <div id="res"></div>
+
+    <script>
+      const reminderInput = document.querySelector("#reminder-input");
+      const countInput = document.querySelector("#count-input");
+      const button = document.querySelector("#btn-show");
+      const result = document.querySelector("#res");
+
+      function handleShowReminders() {
+        const reminderText = reminderInput.value.trim();
+        const countValue = Number(countInput.value);
+
+        let message = "";
+
+        if (reminderText === "") {
+          message = "Message cannot be empty.";
+        } else if (Number.isNaN(countValue)) {
+          message = "Count must be a number.";
+        } else {
+          for (let i = 1; i <= countValue; i++) {
+            message = message + "Reminder " + i + ": " + reminderText + "<br>";
+          }
+        }
+        result.innerHTML = message;
+      }
+
+      button.addEventListener("click", handleShowReminders);
+    </script>
+  </body>
+</html>
