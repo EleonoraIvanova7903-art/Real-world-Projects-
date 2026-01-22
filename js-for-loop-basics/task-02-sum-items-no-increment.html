@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sum items</title>
+  </head>
+  <body>
+    <h2>Sum items</h2>
+    <label for="price-input">Price</label>
+    <input type="text" id="price-input" />
+    <br /><br />
+
+    <label for="qty-input">Quantity</label>
+    <input type="text" id="qty-input" />
+    <br /><br />
+
+    <button id="btn-calc">Calculate</button>
+    <br /><br />
+    <div id="res"></div>
+
+    <script>
+      const priceInput = document.querySelector("#price-input");
+      const qtyInput = document.querySelector("#qty-input");
+      const button = document.querySelector("#btn-calc");
+      const result = document.querySelector("#res");
+
+      function handleCalcTotal() {
+        const priceValue = Number(priceInput.value);
+        const qtyValue = Number(qtyInput.value);
+        let total = 0;
+        let message = "";
+
+        if (Number.isNaN(priceValue)) {
+          message = "Price must be a number.";
+        } else if (Number.isNaN(qtyValue)) {
+          message = "Quantity must be a number.";
+        } else if (priceValue <= 0) {
+          message = "Price must be greater than 0.";
+        } else if (qtyValue <= 0) {
+          message = "Quantity must be greater than 0.";
+        } else {
+          for (let i = 0; i <= qtyValue; i++) {
+            total += priceValue;
+          }
+          message = "Total: " + total;
+        }
+        result.innerHTML = message;
+      }
+
+      button.addEventListener("click", handleCalcTotal);
+    </script>
+  </body>
+</html>
